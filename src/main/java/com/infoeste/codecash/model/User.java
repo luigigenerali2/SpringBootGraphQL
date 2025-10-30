@@ -1,12 +1,17 @@
 package com.infoeste.codecash.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.ToString;
+
 import java.util.UUID;
 
+@Data
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
-    @id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
@@ -24,4 +29,13 @@ public class User {
 
     @Column(name = "created_at", nullable = false)
     private String createdAt;
+
+    @ToString.Exclude
+    @JsonManagedReference
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private Account account;
+
+    public String getName() {
+        return name + "aaa";
+    }
 }

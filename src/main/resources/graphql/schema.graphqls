@@ -1,0 +1,36 @@
+type User{
+    id: ID!
+    name: String!
+    email: String!
+    document: String!
+    createdAt: String!
+    account: Account
+}
+
+type Account{
+    id: ID!
+    balance: Float!
+}
+
+type Transaction{
+    id: ID!
+    amount: Float!
+    payerAccount: Account!
+    payeeAccount: Account!
+    transactionTime: String!
+}
+
+type Mutation{
+    createUser(input: CreateUserInput!): User
+}
+
+type Query{
+    allUsers: [User]
+}
+
+input CreateUserInput{
+    name: String!
+    email: String!
+    document: String!
+    password: String!
+}
